@@ -44,7 +44,7 @@ up.moves.snapshot(move_xid) // GET /nudge/api/v.1.0/moves/{move_xid}/snapshot
 ## Workouts
 
 ```javascript
-up.workouts.all()                     // GET /nudge/api/v.1.0/users/@me/workouts
+up.workouts.get()                     // GET /nudge/api/v.1.0/users/@me/workouts
 
 up.workouts.create()                  // POST /nudge/api/v.1.0/users/@me/workouts
 
@@ -58,7 +58,7 @@ up.workouts.snapshot.get(workout_xid) // GET /nudge/api/v.1.0/workouts/{workout_
 ## Sleeps
 
 ```javascript
-up.sleeps.all()                   // GET /nudge/api/v.1.0/users/@me/sleeps
+up.sleeps.get()                   // GET /nudge/api/v.1.0/users/@me/sleeps
 
 up.sleeps.get(sleep_xid)          // GET /nudge/api/v.1.0/sleeps/{sleep_xid}
 
@@ -70,7 +70,7 @@ up.sleeps.snapshot.get(sleep_xid) // GET /nudge/api/v.1.0/sleeps/{sleep_xid}/sna
 ## Meals
 
 ```javascript
-up.meals.all()          // GET /nudge/api/v.1.0/users/@me/meals
+up.meals.get()          // GET /nudge/api/v.1.0/users/@me/meals
 
 up.meals.create()       // POST /nudge/api/v.1.0/users/@me/meals
 
@@ -80,13 +80,13 @@ up.meals.get(meal_xid)  // GET /nudge/api/v.1.0/meals/{meal_xid}
 ## Body Composition
 
 ```javascript
-up.body_events.create() // POST /nudge/api/v.1.0/users/@me/body_events
+up.body_events.create()           // POST /nudge/api/v.1.0/users/@me/body_events
 
-up.body_events.all() // GET /nudge/api/v.1.0/users/@me/body_events
+up.body_events.get()              // GET /nudge/api/v.1.0/users/@me/body_events
 
-up.body_events.get(event_xid) // GET /nudge/api/v.1.0/body_events/{event_xid}
+up.body_events.get(event_xid)     // GET /nudge/api/v.1.0/body_events/{event_xid}
 
-up.body_events.delete(event_xid) // DELETE /nudge/api/v.1.0/body_events/{event_xid}
+up.body_events.delete(event_xid)  // DELETE /nudge/api/v.1.0/body_events/{event_xid}
 ```
 
 ## Cardiac Metrics
@@ -94,7 +94,7 @@ up.body_events.delete(event_xid) // DELETE /nudge/api/v.1.0/body_events/{event_x
 ```javascript
 up.cardiac_events.create()          // POST /nudge/api/v.1.0/users/@me/cardiac_events
 
-up.cardiac_events.all()             // GET /nudge/api/v.1.0/users/@me/cardiac_events
+up.cardiac_events.get()             // GET /nudge/api/v.1.0/users/@me/cardiac_events
 
 up.cardiac_events.get(event_xid)    // GET /nudge/api/v.1.0/cardiac_events/{event_xid}
 
