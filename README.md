@@ -5,9 +5,9 @@ Jawbone UP API Node.js Library
 
 ```javascript
 var up_config = { 
-  client_id: 'xxx', // UP application api id
+  client_id:     'xxx', // UP application api id
   client_secret: 'yyy', // UP application api secret
-  access_token:'zzz' // access token for specific user
+  access_token:  'zzz'  // access token for specific user
 }
 
 var up = require('jawbone-up')(up_config);
@@ -17,7 +17,7 @@ var up = require('jawbone-up')(up_config);
 ## User information 
 
 ```javascript
-up.me.get()       // GET /nudge/api/v.1.0/users/@me
+up.info.get()       // GET /nudge/api/v.1.0/users/@me
 
 up.friends.get()  // GET /nudge/api/v.1.0/users/@me/friends
 
