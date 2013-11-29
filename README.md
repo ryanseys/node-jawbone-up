@@ -10,7 +10,9 @@ var up_config = {
   access_token:  'zzz'  // access token for specific user
 }
 
-var up = require('jawbone-up')(up_config);
+var UpAPI = require('jawbone-up');
+
+var up = UpAPI(up_config);
 ```
 
 ## User information 
