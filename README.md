@@ -11,13 +11,12 @@ var up_config = {
 }
 
 var up = require('jawbone-up')(up_config);
-
 ```
 
 ## User information 
 
 ```javascript
-up.info.get()       // GET /nudge/api/v.1.0/users/@me
+up.info.get()     // GET /nudge/api/v.1.0/users/@me
 
 up.friends.get()  // GET /nudge/api/v.1.0/users/@me/friends
 
@@ -80,31 +79,31 @@ up.meals.get(meal_xid)  // GET /nudge/api/v.1.0/meals/{meal_xid}
 ## Body Composition
 
 ```javascript
-up.body_events.create()           // POST /nudge/api/v.1.0/users/@me/body_events
+up.events.body.create()           // POST /nudge/api/v.1.0/users/@me/body_events
 
-up.body_events.get()              // GET /nudge/api/v.1.0/users/@me/body_events
+up.events.body.get()              // GET /nudge/api/v.1.0/users/@me/body_events
 
-up.body_events.get(event_xid)     // GET /nudge/api/v.1.0/body_events/{event_xid}
+up.events.body.get(event_xid)     // GET /nudge/api/v.1.0/body_events/{event_xid}
 
-up.body_events.delete(event_xid)  // DELETE /nudge/api/v.1.0/body_events/{event_xid}
+up.events.body.delete(event_xid)  // DELETE /nudge/api/v.1.0/body_events/{event_xid}
 ```
 
 ## Cardiac Metrics
 
 ```javascript
-up.cardiac_events.create()          // POST /nudge/api/v.1.0/users/@me/cardiac_events
+up.events.cardiac.create()          // POST /nudge/api/v.1.0/users/@me/cardiac_events
 
-up.cardiac_events.get()             // GET /nudge/api/v.1.0/users/@me/cardiac_events
+up.events.cardiac.get()             // GET /nudge/api/v.1.0/users/@me/cardiac_events
 
-up.cardiac_events.get(event_xid)    // GET /nudge/api/v.1.0/cardiac_events/{event_xid}
+up.events.cardiac.get(event_xid)    // GET /nudge/api/v.1.0/cardiac_events/{event_xid}
 
-up.cardiac_events.delete(event_xid) // DELETE /nudge/api/v.1.0/cardiac_events/{event_xid}
+up.events.cardiac.delete(event_xid) // DELETE /nudge/api/v.1.0/cardiac_events/{event_xid}
 ```
 
 ## Generic Events
 
 ```javascript
-up.generic_events.create() // POST /nudge/api/v.1.0/users/@me/generic_events
+up.events.generic.create() // POST /nudge/api/v.1.0/users/@me/generic_events
 ```
 
 ## Mood
