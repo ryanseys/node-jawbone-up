@@ -695,6 +695,20 @@ module.exports = function(options) {
     }
   };
 
+  /**
+   * Get info of user.
+   *
+   * @method me
+   * @param  {Object}   options  All options to be used in the request.
+   * @param  {Function} callback A callback to fire when response is recieved.
+   */
+  var me_get = function(options, callback, fake) {
+    if(good_params(options, callback)) {
+      var url = BASE_URL + '/users/@me';
+      api_get({ url: url, fake: fake }, callback);
+    }
+  };
+
   var to_export = {
     get client_id() {
       return self.client_id;
@@ -723,6 +737,9 @@ module.exports = function(options) {
     get version() {
       return version;
     },
+
+    /** @class me */
+    me: me_get,
     /** @class moves */
     moves: {
       get: moves_get,
