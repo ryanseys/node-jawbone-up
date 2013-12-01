@@ -213,6 +213,18 @@ up.mood.delete({ xid : mood_xid }, callback)  // DELETE /nudge/api/v.1.0/mood/{m
 up.timezone.get({}, callback) // GET /nudge/api/v.1.0/users/@me/timezone
 ```
 
+## Tests
+
+Tests can be found in the `test` folder.
+
+To run tests:
+
+```bash
+npm install  # installs dependencies
+npm test  # runs the tests
+```
+
+
 # License
 
 The MIT License (MIT)
