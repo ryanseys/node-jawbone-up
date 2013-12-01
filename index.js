@@ -95,7 +95,7 @@ module.exports = function(options) {
     }
   };
 
-  var api_delete = function(url_end, callback) {
+  var api_delete = function(options, callback) {
     if(!options.fake) {
       request({
         method: 'delete',
@@ -266,6 +266,20 @@ module.exports = function(options) {
     }
   };
 
+  var meals_delete = function(options, callback, fake) {
+    // DELETE /nudge/api/v.1.0/meals/{sleep_xid}
+    if(good_params(options, callback)) {
+      var xid = options.xid;
+      if(!xid) {
+        return callback({ error: true, message: ERROR_NO_XID }, null);
+      }
+      else {
+        var url = BASE_URL + '/meals/' + xid;
+        api_delete({ url: url, fake: fake }, callback);
+      }
+    }
+  };
+
   var sleeps_get = function(options, callback, fake) {
     // GET /nudge/api/v.1.0/users/@me/sleeps
     // GET /nudge/api/v.1.0/sleeps/{sleep_xid}
@@ -399,19 +413,37 @@ module.exports = function(options) {
   };
 
   var mood_create = function(options, callback, fake) {
-
+    if(good_params(data, callback)) {
+      var url = BASE_URL + '/users/@me/mood';
+      api_post({ url: url, fake: fake, data: data }, callback);
+    }
   };
 
   var mood_delete = function(options, callback, fake) {
-
+    if(good_params(options, callback)) {
+      var xid = options.xid;
+      if(!xid) {
+        return callback({ error: true, message: ERROR_NO_XID }, null);
+      }
+      else {
+        var url = BASE_URL + '/mood/' + xid;
+        api_delete({ url: url, fake: fake }, callback);
+      }
+    }
   };
 
   var trends_get = function(options, callback, fake) {
-
+    if(good_params(options, callback)) {
+      var url = BASE_URL + '/users/@me/trends';
+      api_get({ url: url, fake: fake }, callback);
+    }
   };
 
   var goals_get = function(options, callback, fake) {
-
+    if(good_params(options, callback)) {
+      var url = BASE_URL + '/users/@me/goals';
+      api_get({ url: url, fake: fake }, callback);
+    }
   };
 
   return {
@@ -448,7 +480,9 @@ module.exports = function(options) {
       snapshot: moves_snapshot
     },
     meals: {
-
+      get: meals_get,
+      create: meals_create,
+      'delete': meals_delete
     },
     events: {
       body: {

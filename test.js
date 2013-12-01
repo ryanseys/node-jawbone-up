@@ -21,4 +21,8 @@ up.timezone.get(function(err, body) {
 
 up.sleeps.create({ time_created: 1385877310, time_completed: 1385878310, tz: 'America/Toronto' }, function(err, body) {
   console.log('POST: ' + body);
-});
+}, debug);
+
+up.meals.delete({ xid: 123 }, function(err, body) {
+  console.log(err, body);
+}, debug);
