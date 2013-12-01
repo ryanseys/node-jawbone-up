@@ -7,6 +7,7 @@ Jawbone UP API Node.js Library
 
 `npm install jawbone-up --save`
 
+## Usage
 
 ```javascript
 var options = {
@@ -17,6 +18,8 @@ var options = {
 
 var up = require('jawbone-up')(options);
 ```
+
+# Available Commands
 
 ## User information
 
