@@ -1,24 +1,22 @@
 node-jawbone-up
 ===============
 
-Jawbone UP API Node.js Library 
+Jawbone UP API Node.js Library
 
 ```javascript
-var up_config = { 
+var up_config = {
   client_id:     'xxx', // UP application api id
   client_secret: 'yyy', // UP application api secret
   access_token:  'zzz'  // access token for specific user
 }
 
-var UpAPI = require('jawbone-up');
-
-var up = UpAPI(up_config);
+var up = require('jawbone-up')(options);
 ```
 
-## User information 
+## User information
 
 ```javascript
-up.info.get()     // GET /nudge/api/v.1.0/users/@me
+up.me.get()       // GET /nudge/api/v.1.0/users/@me
 
 up.friends.get()  // GET /nudge/api/v.1.0/users/@me/friends
 
@@ -32,13 +30,13 @@ up.goals.get()    // GET /nudge/api/v.1.0/users/@me/goals
 ## Moves
 
 ```javascript
-up.moves.get()              // GET /nudge/api/v.1.0/users/@me/moves
+up.moves.get({}, callback)              // GET /nudge/api/v.1.0/users/@me/moves
 
-up.moves.get(move_xid)      // GET /nudge/api/v.1.0/moves/{move_xid}
+up.moves.get({ xid : move_xid }, callback)      // GET /nudge/api/v.1.0/moves/{move_xid}
 
-up.moves.image(move_xid)    // GET /nudge/api/v.1.0/moves/{move_xid}/image
+up.moves.image({ xid : move_xid }, callback)    // GET /nudge/api/v.1.0/moves/{move_xid}/image
 
-up.moves.snapshot(move_xid) // GET /nudge/api/v.1.0/moves/{move_xid}/snapshot
+up.moves.snapshot({ xid : move_xid }, callback) // GET /nudge/api/v.1.0/moves/{move_xid}/snapshot
 
 ```
 
@@ -105,7 +103,14 @@ up.events.cardiac.delete(event_xid) // DELETE /nudge/api/v.1.0/cardiac_events/{e
 ## Generic Events
 
 ```javascript
-up.events.generic.create() // POST /nudge/api/v.1.0/users/@me/generic_events
+
+// These are undocumented...
+up.events.generic.get()           // GET /nudge/api/v.1.0/users/@me/generic_events
+up.events.generic.get(event_xid)  // GET /nudge/api/v.1.0/generic_events/{event_xid}
+
+
+up.events.generic.create()        // POST /nudge/api/v.1.0/users/@me/generic_events
+
 ```
 
 ## Mood
