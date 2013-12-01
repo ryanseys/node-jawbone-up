@@ -1,8 +1,8 @@
 /**
- * JawboneUp
+ * JawboneUp API wrapper for Node.js
  *
  * @module jawbone-up
- * @author Ryan Seys <ryan@ryanseys.com>
+ * @author Ryan Seys
  */
 
 const packagejson = require('./package.json');
@@ -46,6 +46,15 @@ module.exports = function(options) {
     return str.join("&");
   };
 
+  /**
+   * Checks if params are good. If they are, returns true.
+   * Else it will return false and call the callback with an error (if available).
+   *
+   * @private
+   * @param  {Object}   options  Object part of params to check.
+   * @param  {Function} callback Callback function part of params to check.
+   * @return {Boolean}           true if params are good, false otherwise.
+   */
   var good_params = function(options, callback, fake) {
     if(typeof(callback) !== 'function') {
       return false;
@@ -60,6 +69,13 @@ module.exports = function(options) {
     }
   };
 
+  /**
+   * Makes a GET request to the API with options.
+   *
+   * @private
+   * @param  {Object}   options  Options that includes the `url` to GET.
+   * @param  {Function} callback Function to callback with response.
+   */
   var api_get = function(options, callback) {
     if(!options.fake) {
       request({
@@ -77,6 +93,15 @@ module.exports = function(options) {
     }
   };
 
+  /**
+   * Makes a POST request to the API with options.
+   *
+   * @private
+   * @param  {Object}   options  Options that includes the `url` to POST and
+   * `data` object to include in POST request.
+   *
+   * @param  {Function} callback Function to callback with response.
+   */
   var api_post = function(options, callback) {
     if(!options.fake) {
       request({
@@ -96,6 +121,13 @@ module.exports = function(options) {
     }
   };
 
+  /**
+   * Makes a DELETE request to the API with options.
+   *
+   * @private
+   * @param  {Object}   options  Options that includes the `url` to DELETE.
+   * @param  {Function} callback Function to callback with response.
+   */
   var api_delete = function(options, callback) {
     if(!options.fake) {
       request({
