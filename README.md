@@ -5,15 +5,19 @@ Jawbone UP API Node.js Library
 
 ## Installation
 
-Just like any ol' node module:
-
 `npm install jawbone-up`
 
 ## Usage
 
+An `access_token` attribute is required in the options object!
+See below for an example of how this could be done.
+
+This library does not assist in getting an access_token through OAuth,
+but once you get the token, it will apparently last for a **year**.
+
 ```javascript
 var options = {
-  access_token:  'zzz'  // **Required**: Access token for specific user
+  access_token:  'zzz'  // **Required**: Access token for specific user.
   client_id:     'xxx', // Optional: UP application api id (not used)
   client_secret: 'yyy', // Optional: UP application api secret (not used)
 }
@@ -26,7 +30,7 @@ var up = require('jawbone-up')(options);
 ## User information
 
 ```javascript
-// get info related to authenticated user
+// get user info
 up.me({}, callback)             // GET /nudge/api/v.1.0/users/@me
 
 // get friends of user
@@ -81,13 +85,13 @@ up.workouts.snapshot({ xid : workout_xid }, callback) // GET /nudge/api/v.1.0/wo
 
 ```javascript
 // get all sleeps (paginated results)
-up.sleeps.get({}, callback)                          // GET /nudge/api/v.1.0/users/@me/sleeps
+up.sleeps.get({}, callback)                           // GET /nudge/api/v.1.0/users/@me/sleeps
 
 // get a specific sleep
 up.sleeps.get({ xid : sleep_xid }, callback)          // GET /nudge/api/v.1.0/sleeps/{sleep_xid}
 
 // create a new sleep
-up.sleeps.create(options, callback)                 // POST /nudge/api/v.1.0/users/@me/sleeps
+up.sleeps.create(options, callback)                   // POST /nudge/api/v.1.0/users/@me/sleeps
 
 // get a specific sleep image
 up.sleeps.image({ xid : sleep_xid }, callback)        // GET /nudge/api/v.1.0/sleeps/{sleep_xid}/image
@@ -102,64 +106,87 @@ up.sleeps.delete({ xid : sleep_xid }, callback)       // DELETE /nudge/api/v.1.0
 ## Meals
 
 ```javascript
+// get all meals (paginated results)
 up.meals.get({}, callback)                   // GET /nudge/api/v.1.0/users/@me/meals
 
+// create a new meal
 up.meals.create(options, callback)           // POST /nudge/api/v.1.0/users/@me/meals
 
+// get a specific meal
 up.meals.get({ xid : meal_xid }, callback)   // GET /nudge/api/v.1.0/meals/{meal_xid}
 ```
 
 ## Body Composition
 
 ```javascript
-up.events.body.create()           // POST /nudge/api/v.1.0/users/@me/body_events
+// get all body events (paginated results)
+up.events.body.get({}, callback)                      // GET /nudge/api/v.1.0/users/@me/body_events
 
-up.events.body.get()              // GET /nudge/api/v.1.0/users/@me/body_events
+// get a specific body event
+up.events.body.get({ xid : event_xid }, callback)     // GET /nudge/api/v.1.0/body_events/{event_xid}
 
-up.events.body.get(event_xid)     // GET /nudge/api/v.1.0/body_events/{event_xid}
+// create a new body event
+up.events.body.create(options, callback)              // POST /nudge/api/v.1.0/users/@me/body_events
 
-up.events.body.delete(event_xid)  // DELETE /nudge/api/v.1.0/body_events/{event_xid}
+// delete a specific body event
+up.events.body.delete({ xid : event_xid }, callback)  // DELETE /nudge/api/v.1.0/body_events/{event_xid}
 ```
 
 ## Cardiac Metrics
 
 ```javascript
-up.events.cardiac.create()          // POST /nudge/api/v.1.0/users/@me/cardiac_events
+// get all cardiac events (paginated results)
+up.events.cardiac.get({}, callback)                      // GET /nudge/api/v.1.0/users/@me/cardiac_events
 
-up.events.cardiac.get()             // GET /nudge/api/v.1.0/users/@me/cardiac_events
+// get a specific cardiac event
+up.events.cardiac.get({ xid : event_xid }, callback)     // GET /nudge/api/v.1.0/cardiac_events/{event_xid}
 
-up.events.cardiac.get(event_xid)    // GET /nudge/api/v.1.0/cardiac_events/{event_xid}
+// create a new cardiac event
+up.events.cardiac.create(options, callback)              // POST /nudge/api/v.1.0/users/@me/cardiac_events
 
-up.events.cardiac.delete(event_xid) // DELETE /nudge/api/v.1.0/cardiac_events/{event_xid}
+// delete a specific cardiac event
+up.events.cardiac.delete({ xid : event_xid }, callback)  // DELETE /nudge/api/v.1.0/cardiac_events/{event_xid}
 ```
 
 ## Generic Events
 
 ```javascript
+// get all generic events (paginated results)
+up.events.generic.get({}, callback)                      // GET /nudge/api/v.1.0/users/@me/generic_events
 
-// These are undocumented...
-up.events.generic.get()           // GET /nudge/api/v.1.0/users/@me/generic_events
-up.events.generic.get(event_xid)  // GET /nudge/api/v.1.0/generic_events/{event_xid}
+// get a specific generic event
+up.events.generic.get({ xid : event_xid }, callback)     // GET /nudge/api/v.1.0/generic_events/{event_xid}
 
+// create a new generic event
+up.events.generic.create(options, callback)              // POST /nudge/api/v.1.0/users/@me/generic_events
 
-up.events.generic.create()        // POST /nudge/api/v.1.0/users/@me/generic_events
-
+// delete a specific generic event
+up.events.generic.delete({ xid : event_xid }, callback)  // DELETE /nudge/api/v.1.0/generic_events/{event_xid}
 ```
 
 ## Mood
 
 ```javascript
-up.mood.create()          // POST /nudge/api/v.1.0/users/@me/mood
+// get all moods (paginated results)
+up.mood.get({}, callback)                     // GET /nudge/api/v.1.0/users/@me/mood
 
-up.mood.get()             // GET /nudge/api/v.1.0/users/@me/mood
+// get a specific mood
+up.mood.get({ xid : mood_xid }, callback)     // GET /nudge/api/v.1.0/mood/{mood_xid}
 
-up.mood.get(event_xid)    // GET /nudge/api/v.1.0/mood/{event_xid}
+// create a new mood
+up.mood.create(options, callback)             // POST /nudge/api/v.1.0/users/@me/mood
 
-up.mood.delete(event_xid) // DELETE /nudge/api/v.1.0/mood/{event_xid}
+// delete a specific mood
+up.mood.delete({ xid : mood_xid }, callback)  // DELETE /nudge/api/v.1.0/mood/{mood_xid}
 ```
 
 ## Time Zone
 
 ```javascript
-up.timezone.get() // GET /nudge/api/v.1.0/users/@me/timezone
+// get a user's timezone
+up.timezone.get({}, callback) // GET /nudge/api/v.1.0/users/@me/timezone
 ```
+
+# License
+
+MIT
