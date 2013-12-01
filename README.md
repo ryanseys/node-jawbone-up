@@ -38,19 +38,19 @@ Or see below for an overview...
 
 ```javascript
 // get user info
-up.me({}, callback)             // GET /nudge/api/v.1.0/users/@me
+up.me.get({}, callback)             // GET /nudge/api/v.1.0/users/@me
 
 // get friends of user
-up.friends({}, callback)        // GET /nudge/api/v.1.0/users/@me/friends
+up.friends.get({}, callback)        // GET /nudge/api/v.1.0/users/@me/friends
 
 // get mood of user
-up.mood.get({}, callback)       // GET /nudge/api/v.1.0/users/@me/mood
+up.mood.get({}, callback)           // GET /nudge/api/v.1.0/users/@me/mood
 
 // get trends of user
-up.trends({}, callback)         // GET /nudge/api/v.1.0/users/@me/trends
+up.trends.get({}, callback)         // GET /nudge/api/v.1.0/users/@me/trends
 
 // get goals of user
-up.goals({}, callback)          // GET /nudge/api/v.1.0/users/@me/goals
+up.goals.get({}, callback)          // GET /nudge/api/v.1.0/users/@me/goals
 ```
 
 ## Moves
