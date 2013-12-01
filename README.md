@@ -188,7 +188,7 @@ up.events.generic.delete({ xid : event_xid }, callback)  // DELETE /nudge/api/v.
 
 ## Mood
 
-[Mood Documentation](http://ryanseys.github.io/node-jawbone-up/docs/moods.html)
+[Mood Documentation](http://ryanseys.github.io/node-jawbone-up/docs/mood.html)
 
 ```javascript
 // get all moods (paginated results)
