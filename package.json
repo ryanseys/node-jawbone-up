@@ -8,7 +8,9 @@
     "url": "https://github.com/ryanseys/node-jawbone-up"
   },
   "main": "index.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "jsdoc": "git+https://github.com/jsdoc3/jsdoc.git"
+  },
   "optionalDependencies": {},
   "engines": {
     "node": "0.10.22",

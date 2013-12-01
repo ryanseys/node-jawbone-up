@@ -10,21 +10,28 @@ Jawbone UP API Node.js Library
 ## Usage
 
 An `access_token` attribute is required in the options object!
-See below for an example of how this could be done.This library does not
+See below for an example of how this could be done. This library does not
 assist in getting an `access_token` through OAuth, but once you get the token,
 it will apparently last for a **year**.
 
 ```javascript
 var options = {
   access_token:  'zzz'  // **Required**: Access token for specific user.
-  client_id:     'xxx', // Optional: UP application api id (not used)
-  client_secret: 'yyy', // Optional: UP application api secret (not used)
 }
 
 var up = require('jawbone-up')(options);
 ```
 
 # Documentation
+
+You can generate docs yourself:
+
+```
+npm install
+node_modules/.bin/jsdoc . -d docs
+```
+
+Or see below for an overview...
 
 ## User information
 
