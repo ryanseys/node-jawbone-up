@@ -213,23 +213,28 @@ up.mood.delete({ xid : mood_xid }, callback)  // DELETE /nudge/api/v.1.0/mood/{m
 up.timezone.get({}, callback) // GET /nudge/api/v.1.0/users/@me/timezone
 ```
 
-## Tests
+# Tests
 
 Tests can be found in the `test` folder.
 
 To run tests:
 
-Make sure you first have dependencies installed by running
+Make sure you first have dependencies installed by running:
 
 ```bash
 npm install
 ```
 
-Then you may run all the tests with
+Then you may run all the tests with:
 
 ```bash
 npm test
 ```
+
+# Contributing
+
+I would love contributions. Filing issues [on Github](https://github.com/ryanseys/node-jawbone-up/issues)
+or sending pull requests is always greatly appreciated.
 
 # License
 
