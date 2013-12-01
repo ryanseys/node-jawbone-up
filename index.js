@@ -398,6 +398,22 @@ module.exports = function(options) {
     }
   };
 
+  var mood_create = function(options, callback, fake) {
+
+  };
+
+  var mood_delete = function(options, callback, fake) {
+
+  };
+
+  var trends_get = function(options, callback, fake) {
+
+  };
+
+  var goals_get = function(options, callback, fake) {
+
+  };
+
   return {
     get client_id() {
       return self.client_id;
@@ -427,12 +443,58 @@ module.exports = function(options) {
       return version;
     },
     moves: {
-      get: moves_get
+      get: moves_get,
+      image: moves_image,
+      snapshot: moves_snapshot
+    },
+    meals: {
+
+    },
+    events: {
+      body: {
+        get: body_events_get,
+        create: body_events_create,
+        'delete': body_events_delete
+      },
+      cardiac: {
+        get: cardiac_events_get,
+        create: cardiac_events_create,
+        'delete': cardiac_events_delete
+      },
+      generic: {
+        get: generic_events_get,
+        create: generic_events_create,
+        'delete': generic_events_delete
+      }
     },
     timezone: {
       get: timezone_get
     },
+    friends: {
+      get: friends_get
+    },
+    mood: {
+      get: mood_get,
+      create: mood_create,
+      'delete': mood_delete
+    },
+    workouts: {
+      get: workouts_get,
+      create: workouts_create,
+      image: workouts_image,
+      snapshot: workouts_snapshot,
+      'delete': null // unknown & undocumented
+    },
+    trends: {
+      get: trends_get
+    },
+    goals: {
+      get: goals_get
+    },
     sleeps: {
+      get: sleeps_get,
+      image: sleeps_image,
+      snapshot: sleeps_snapshot,
       create: sleeps_create,
       'delete': sleeps_delete // undocumented
     }
