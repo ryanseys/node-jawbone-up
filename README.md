@@ -11,7 +11,7 @@ Jawbone UP API Node.js Library
 
 ```javascript
 var options = {
-  access_token:  'zzz'   // Required: Access token for specific user
+  access_token:  'zzz'  // **Required**: Access token for specific user
   client_id:     'xxx', // Optional: UP application api id (not used)
   client_secret: 'yyy', // Optional: UP application api secret (not used)
 }
@@ -19,33 +19,36 @@ var options = {
 var up = require('jawbone-up')(options);
 ```
 
-# Available Commands
+# Documentation
 
 ## User information
 
 ```javascript
-up.me()         // GET /nudge/api/v.1.0/users/@me
+up.me({}, callback)             // GET /nudge/api/v.1.0/users/@me
 
-up.friends()    // GET /nudge/api/v.1.0/users/@me/friends
+up.friends({}, callback)        // GET /nudge/api/v.1.0/users/@me/friends
 
-up.mood.get()   // GET /nudge/api/v.1.0/users/@me/mood
+up.mood.get({}, callback)       // GET /nudge/api/v.1.0/users/@me/mood
 
-up.trends()     // GET /nudge/api/v.1.0/users/@me/trends
+up.trends({}, callback)         // GET /nudge/api/v.1.0/users/@me/trends
 
-up.goals()      // GET /nudge/api/v.1.0/users/@me/goals
+up.goals({}, callback)          // GET /nudge/api/v.1.0/users/@me/goals
 ```
 
 ## Moves
 
 ```javascript
-up.moves.get({}, callback)              // GET /nudge/api/v.1.0/users/@me/moves
+// get all moves (paginated results)
+up.moves.get({}, callback)                      // GET /nudge/api/v.1.0/users/@me/moves
 
+// get a specific moves
 up.moves.get({ xid : move_xid }, callback)      // GET /nudge/api/v.1.0/moves/{move_xid}
 
+// get a specific move image
 up.moves.image({ xid : move_xid }, callback)    // GET /nudge/api/v.1.0/moves/{move_xid}/image
 
+// get a specific move intensity
 up.moves.snapshot({ xid : move_xid }, callback) // GET /nudge/api/v.1.0/moves/{move_xid}/snapshot
-
 ```
 
 ## Workouts
@@ -71,25 +74,25 @@ up.workouts.snapshot({ xid : workout_xid }, callback) // GET /nudge/api/v.1.0/wo
 ## Sleeps
 
 ```javascript
-up.sleeps.get()                   // GET /nudge/api/v.1.0/users/@me/sleeps
+up.sleeps.get({}, callback)                          // GET /nudge/api/v.1.0/users/@me/sleeps
 
-up.sleeps.get(sleep_xid)          // GET /nudge/api/v.1.0/sleeps/{sleep_xid}
+up.sleeps.get({ xid : sleep_xid }, callback)          // GET /nudge/api/v.1.0/sleeps/{sleep_xid}
 
-up.sleeps.image(sleep_xid)    // GET /nudge/api/v.1.0/sleeps/{sleep_xid}/image
+up.sleeps.image({ xid : sleep_xid }, callback)        // GET /nudge/api/v.1.0/sleeps/{sleep_xid}/image
 
-up.sleeps.snapshot(sleep_xid) // GET /nudge/api/v.1.0/sleeps/{sleep_xid}/snapshot
+up.sleeps.snapshot({ xid : sleep_xid }, callback)     // GET /nudge/api/v.1.0/sleeps/{sleep_xid}/snapshot
 
-up.sleeps.delete(event_xid)       // DELETE /nudge/api/v.1.0/sleeps/{sleep_xid}
+up.sleeps.delete({ xid : sleep_xid }, callback)       // DELETE /nudge/api/v.1.0/sleeps/{sleep_xid}
 ```
 
 ## Meals
 
 ```javascript
-up.meals.get()          // GET /nudge/api/v.1.0/users/@me/meals
+up.meals.get({}, callback)                   // GET /nudge/api/v.1.0/users/@me/meals
 
-up.meals.create()       // POST /nudge/api/v.1.0/users/@me/meals
+up.meals.create(options, callback)           // POST /nudge/api/v.1.0/users/@me/meals
 
-up.meals.get(meal_xid)  // GET /nudge/api/v.1.0/meals/{meal_xid}
+up.meals.get({ xid : meal_xid }, callback)   // GET /nudge/api/v.1.0/meals/{meal_xid}
 ```
 
 ## Body Composition
