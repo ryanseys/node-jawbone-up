@@ -24,15 +24,15 @@ var up = require('jawbone-up')(options);
 ## User information
 
 ```javascript
-up.me.get()       // GET /nudge/api/v.1.0/users/@me
+up.me()         // GET /nudge/api/v.1.0/users/@me
 
-up.friends.get()  // GET /nudge/api/v.1.0/users/@me/friends
+up.friends()    // GET /nudge/api/v.1.0/users/@me/friends
 
-up.mood.get()     // GET /nudge/api/v.1.0/users/@me/mood
+up.mood.get()   // GET /nudge/api/v.1.0/users/@me/mood
 
-up.trends.get()   // GET /nudge/api/v.1.0/users/@me/trends
+up.trends()     // GET /nudge/api/v.1.0/users/@me/trends
 
-up.goals.get()    // GET /nudge/api/v.1.0/users/@me/goals
+up.goals()      // GET /nudge/api/v.1.0/users/@me/goals
 ```
 
 ## Moves
@@ -51,15 +51,21 @@ up.moves.snapshot({ xid : move_xid }, callback) // GET /nudge/api/v.1.0/moves/{m
 ## Workouts
 
 ```javascript
-up.workouts.get()                     // GET /nudge/api/v.1.0/users/@me/workouts
 
-up.workouts.create()                  // POST /nudge/api/v.1.0/users/@me/workouts
+// get all workouts (paginated results)
+up.workouts.get({}, callback)                         // GET /nudge/api/v.1.0/users/@me/workouts
 
-up.workouts.get(workout_xid)          // GET /nudge/api/v.1.0/workouts/{workout_xid}
+// create a new workout
+up.workouts.create(options, callback)                 // POST /nudge/api/v.1.0/users/@me/workouts
 
-up.workouts.image.get(workout_xid)    // GET /nudge/api/v.1.0/workouts/{workout_xid}/image
+// get a specific workout
+up.workouts.get({ xid : workout_xid }, callback)      // GET /nudge/api/v.1.0/workouts/{workout_xid}
 
-up.workouts.snapshot.get(workout_xid) // GET /nudge/api/v.1.0/workouts/{workout_xid}/snapshot
+// get a specific workout image
+up.workouts.image({ xid : workout_xid }, callback)    // GET /nudge/api/v.1.0/workouts/{workout_xid}/image
+
+// get a specific workout intensity
+up.workouts.snapshot({ xid : workout_xid }, callback) // GET /nudge/api/v.1.0/workouts/{workout_xid}/snapshot
 ```
 
 ## Sleeps
@@ -69,9 +75,9 @@ up.sleeps.get()                   // GET /nudge/api/v.1.0/users/@me/sleeps
 
 up.sleeps.get(sleep_xid)          // GET /nudge/api/v.1.0/sleeps/{sleep_xid}
 
-up.sleeps.image.get(sleep_xid)    // GET /nudge/api/v.1.0/sleeps/{sleep_xid}/image
+up.sleeps.image(sleep_xid)    // GET /nudge/api/v.1.0/sleeps/{sleep_xid}/image
 
-up.sleeps.snapshot.get(sleep_xid) // GET /nudge/api/v.1.0/sleeps/{sleep_xid}/snapshot
+up.sleeps.snapshot(sleep_xid) // GET /nudge/api/v.1.0/sleeps/{sleep_xid}/snapshot
 
 up.sleeps.delete(event_xid)       // DELETE /nudge/api/v.1.0/sleeps/{sleep_xid}
 ```
