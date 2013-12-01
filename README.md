@@ -64,6 +64,8 @@ up.sleeps.get(sleep_xid)          // GET /nudge/api/v.1.0/sleeps/{sleep_xid}
 up.sleeps.image.get(sleep_xid)    // GET /nudge/api/v.1.0/sleeps/{sleep_xid}/image
 
 up.sleeps.snapshot.get(sleep_xid) // GET /nudge/api/v.1.0/sleeps/{sleep_xid}/snapshot
+
+up.sleeps.delete(event_xid)       // DELETE /nudge/api/v.1.0/sleeps/{sleep_xid}
 ```
 
 ## Meals
