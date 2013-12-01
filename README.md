@@ -2,6 +2,8 @@
 
 Jawbone UP API Node.js Library
 
+Official UP API can be found at [jawbone.com/up/developer](https://jawbone.com/up/developer/).
+
 [![NPM](https://nodei.co/npm/jawbone-up.png)](https://npmjs.org/package/jawbone-up)
 
 ## Installation
@@ -26,9 +28,11 @@ var up = require('jawbone-up')(options);
 
 # Documentation
 
-Generated docs hosted here: [ryanseys.github.io/node-jawbone-up/docs](http://ryanseys.github.io/node-jawbone-up/docs/)
+Official UP API can be found at [jawbone.com/up/developer](https://jawbone.com/up/developer/).
 
-You can generate docs yourself:
+Generated documentation for this library is hosted at [ryanseys.github.io/node-jawbone-up/docs](http://ryanseys.github.io/node-jawbone-up/docs/)
+
+You can also generate the docs yourself:
 
 ```
 npm install
