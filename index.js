@@ -1,85 +1,70 @@
 const packagejson = require('./package.json');
 const request = require('request');
-const ERROR_NO_XID = 'Error: No xid provided. Please specify a xid.';
-const ERROR_NOT_IMPLEMENTED = 'Error: Not yet implemented.';
-const ERROR_BAD_PARAMS_CB = 'Error: Bad parameters. Callback function required.';
-const ERROR_BAD_PARAMS_OPT = 'Error: Bad parameters. Options object required.';
 
-/**
- * Serializes an object into a parameter string
- * for use with making REST API calls.
- *
- * Example:
- *   Input: { date: 20131130, page_token: 1335074239 }
- *  Output: 'date=20131130&page_token=1335074239'
- *
- * Source: http://stackoverflow.com/a/1714899/2953164
- *
- * @param  {Object} obj Object to serialize.
- * @return {String}     String representation of object as param string.
- */
-function serialize(obj) {
-  var str = [];
-  for(var p in obj) {
-    if (obj.hasOwnProperty(p)) {
-      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-    }
+
+
+module.exports = function(options) {
+  const BASE_URL = 'https://jawbone.com/nudge/api/v.1.0';
+  const ERROR_NO_XID = 'Error: No xid provided. Please specify a xid.';
+  const ERROR_NOT_IMPLEMENTED = 'Error: Not yet implemented.';
+  const ERROR_BAD_PARAMS_CB = 'Error: Bad parameters. Callback function required.';
+  const ERROR_BAD_PARAMS_OPT = 'Error: Bad parameters. Options object required.';
+
+  var self = this;
+
+  if(typeof(options) !== 'object') {
+    options = {};
   }
-  return str.join("&");
-}
 
-function APIEndPoint(jb) {
-  this._jb = jb;
-}
+  var version = packagejson.version;
 
-function JawboneUp(options) {
-  options = options || {};
-  this._base_url = 'https://jawbone.com/nudge/api/v.1.0';
-  this._client_id = options.client_id || null;
-  this._client_secret = options.client_secret || null;
-  this._access_token = options.access_token || null;
-  this._version = packagejson.version;
-  this._init(options);
-}
+  this.client_id = options.client_id;
+  this.client_secret = options.client_secret;
+  this.access_token = options.access_token;
 
-JawboneUp.prototype = {
+  /**
+   * Serializes an object into a parameter string
+   * for use with making REST API calls.
+   *
+   * Example:
+   *   Input: { date: 20131130, page_token: 1335074239 }
+   *  Output: 'date=20131130&page_token=1335074239'
+   *
+   * Source: http://stackoverflow.com/a/1714899/2953164
+   *
+   * @param  {Object} obj Object to serialize.
+   * @return {String}     String representation of object as param string.
+  */
+  var serialize = function(obj) {
+    var str = [];
+    for(var p in obj) {
+      if (obj.hasOwnProperty(p)) {
+        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+      }
+    }
+    return str.join("&");
+  };
 
-  get client_id() {
-    return this._client_id;
-  },
+  var good_params = function(options, callback, fake) {
+    if(typeof(callback) !== 'function') {
+      return false;
+    }
+    else if(typeof(options) !== 'object') {
+      var error = { error: true, message: ERROR_BAD_PARAMS_OPT };
+      callback(error, null);
+      return false;
+    }
+    else {
+      return true;
+    }
+  };
 
-  get client_secret() {
-    return this._client_secret;
-  },
-
-  get access_token() {
-    return this._access_token;
-  },
-
-  get version() {
-    return this._version;
-  },
-
-  _init: function(options){
-    this.friends = new JawboneFriendsAPI(this);
-    this.moves = new JawboneMovesAPI(this);
-    this.workouts = new JawboneWorkoutsAPI(this);
-    this.sleeps = new JawboneSleepsAPI(this);
-    this.mood = new JawboneMoodAPI(this);
-    this.meals = new JawboneMealsAPI(this);
-    this.events = {};
-    this.events.body = new JawboneBodyEventsAPI(this);
-    this.events.cardiac = new JawboneCardiacEventsAPI(this);
-    this.events.generic = new JawboneGenericEventsAPI(this);
-    this.timezone = new JawboneTimezoneAPI(this);
-  },
-
-  _api_get: function(url_end, callback, fake) {
-    if(!fake) {
+  var api_get = function(options, callback) {
+    if(!options.fake) {
       request({
-        url: this._base_url + url_end,
+        url: options.url,
         headers: {
-          'Authorization': 'Bearer ' + this.access_token
+          'Authorization': 'Bearer ' + access_token
         }
       },
       function(error, response, body) {
@@ -87,189 +72,369 @@ JawboneUp.prototype = {
       });
     }
     else {
-      callback(null, this._base_url + url_end);
+      callback(null, options.url);
     }
-  },
+  };
 
-  _api_post: function(url_end, callback) {
-    callback({error: true, message: ERROR_NOT_IMPLEMENTED });
-  },
+  var api_post = function(options, callback) {
+    if(!options.fake) {
+      request({
+        method: 'post',
+        url: options.url,
+        headers: {
+          'Authorization': 'Bearer ' + access_token
+        },
+        form: options.data
+      },
+      function(error, response, body) {
+        callback(error, body);
+      });
+    }
+    else {
+      callback(null, options.url);
+    }
+  };
 
-  _api_delete: function(url_end, callback) {
-    callback({error: true, message: ERROR_NOT_IMPLEMENTED });
-  }
-};
+  var api_delete = function(url_end, callback) {
+    if(!options.fake) {
+      request({
+        method: 'delete',
+        url: options.url,
+        headers: {
+          'Authorization': 'Bearer ' + access_token
+        }
+      },
+      function(error, response, body) {
+        callback(error, body);
+      });
+    }
+    else {
+      callback(null, options.url);
+    }
+  };
 
-var JawboneMovesAPI = APIEndPoint;
+  var moves_get = function(options, callback, fake) {
+    if(good_params(options, callback)) {
+      // GET /nudge/api/v.1.0/users/@me/moves
+      // GET /nudge/api/v.1.0/moves/{move_xid}
+      var xid = options.xid;
+      var url = BASE_URL + (xid ? '/moves/' + xid : '/users/@me/moves?' + serialize(options));
+      api_get({ url: url, fake: fake }, callback);
+    }
+  };
 
-JawboneMovesAPI.prototype = {
-  get: function(options, callback, fake) {
-    if(typeof(callback) !== 'function') {
-      return { error: true, message: ERROR_BAD_PARAMS_CB };
-    }
-    else if(typeof(options) !== 'object') {
-      return callback({ error: true, message: ERROR_BAD_PARAMS_OPT }, null);
-    }
-    // GET /nudge/api/v.1.0/users/@me/moves
-    // GET /nudge/api/v.1.0/moves/{move_xid}
-    var xid = options.xid;
-    var url = xid ? '/moves/' + xid : '/users/@me/moves?' + serialize(options);
-    this._jb._api_get(url, callback, fake);
-  },
-  image: function(options, callback, fake) {
-    if(typeof(callback) !== 'function') {
-      return { error: true, message: ERROR_BAD_PARAMS_CB };
-    }
-    else if(typeof(options) !== 'object') {
-      return callback({ error: true, message: ERROR_BAD_PARAMS_OPT }, null);
-    }
+  var moves_image =  function(options, callback, fake) {
+    if(good_params(options, callback)) {
     // GET /nudge/api/v.1.0/moves/{move_xid}/image
-    var xid = options.xid;
-    if(!xid) {
-      callback({ error: true, message: ERROR_NO_XID }, null);
+      var xid = options.xid;
+      if(!xid) {
+        callback({ error: true, message: ERROR_NO_XID }, null);
+      }
+      else {
+        var url = BASE_URL + '/moves/' + xid + '/image';
+        api_get({ url: url, fake: fake }, callback);
+      }
     }
-    else {
-      var url = '/moves/' + xid + '/image';
-      this._jb._api_get(url, callback, fake);
+  };
+
+  var moves_snapshot = function(options, callback, fake) {
+    if(good_params(options, callback)) {
+      var xid = options.xid;
+      if(!xid) {
+        return callback({ error: true, message: ERROR_NO_XID }, null);
+      }
+      else {
+        // GET /nudge/api/v.1.0/moves/{move_xid}/snapshot
+        var url = BASE_URL + '/moves/' + xid + '/snapshot';
+        api_get({ url: url, fake: fake }, callback);
+      }
     }
-  },
-  snapshot: function(options, callback, fake) {
-    if(typeof(callback) !== 'function') {
-      return { error: true, message: ERROR_BAD_PARAMS_CB };
-    }
-    else if(typeof(options) !== 'object') {
-      return callback({ error: true, message: ERROR_BAD_PARAMS_OPT }, null);
-    }
-    // GET /nudge/api/v.1.0/moves/{move_xid}/snapshot
-    var xid = options.xid;
-    if(!xid) {
-      return callback({ error: true, message: ERROR_NO_XID }, null);
-    }
-    else {
-      var url = '/moves/' + xid + '/snapshot';
-      this._jb._api_get(url, callback, fake);
-    }
-  }
-};
+  };
 
-var JawboneFriendsAPI = APIEndPoint;
-
-JawboneFriendsAPI.prototype = {
-  get: function() {
-    // GET /nudge/api/v.1.0/users/@me/friends
-  }
-};
-
-var JawboneMoodAPI = APIEndPoint;
-
-JawboneMoodAPI.prototype = {
-  get: function() {
-    // GET /nudge/api/v.1.0/users/@me/mood
-  }
-};
-
-var JawboneWorkoutsAPI = APIEndPoint;
-
-JawboneWorkoutsAPI.prototype = {
-  get: function() {
-    // GET /nudge/api/v.1.0/users/@me/workouts
-    // GET /nudge/api/v.1.0/workouts/{workout_xid}
-  },
-  create: function() {
-    // POST /nudge/api/v.1.0/users/@me/workouts
-  },
-  image: function() {
-    // GET /nudge/api/v.1.0/workouts/{workout_xid}/image
-  },
-  snapshot: function() {
-    // GET /nudge/api/v.1.0/workouts/{workout_xid}/snapshot
-  }
-};
-
-var JawboneSleepsAPI = APIEndPoint;
-
-JawboneSleepsAPI.prototype = {
-  get: function() {
-    // GET /nudge/api/v.1.0/users/@me/sleeps
-    // GET /nudge/api/v.1.0/sleeps/{sleep_xid}
-  },
-  create: function() {
-    // POST /nudge/api/users/@me/sleeps
-  },
-  image: function() {
-    // GET /nudge/api/v.1.0/sleeps/{sleep_xid}/image
-  },
-  snapshot: function() {
-    // GET /nudge/api/v.1.0/sleeps/{sleep_xid}/snapshot
-  }
-};
-
-var JawboneMealsAPI = APIEndPoint;
-
-JawboneMealsAPI.prototype = {
-  get: function() {
-    // GET /nudge/api/v.1.0/users/@me/meals
-    // GET /nudge/api/v.1.0/meals/{meal_xid}
-  },
-  create: function() {
-    // POST /nudge/api/v.1.0/users/@me/meals
-  }
-};
-
-var JawboneBodyEventsAPI = APIEndPoint;
-
-JawboneBodyEventsAPI.prototype = {
-  get: function() {
-    // GET /nudge/api/v.1.0/users/@me/body_events
-    // GET /nudge/api/v.1.0/body_events/{event_xid}
-  },
-  create: function() {
-    // POST /nudge/api/v.1.0/users/@me/body_events
-  },
-  delete: function() {
-    // DELETE /nudge/api/v.1.0/body_events/{event_xid}
-  }
-};
-
-var JawboneCardiacEventsAPI = APIEndPoint;
-
-JawboneCardiacEventsAPI.prototype = {
-  get: function() {
-    // GET /nudge/api/v.1.0/users/@me/cardiac_events
-    // GET /nudge/api/v.1.0/cardiac_events/{event_xid}
-  },
-  create: function() {
-    // POST /nudge/api/v.1.0/users/@me/cardiac_events
-  },
-  delete: function() {
-    // DELETE /nudge/api/v.1.0/cardiac_events/{event_xid}
-  }
-};
-
-var JawboneGenericEventsAPI = APIEndPoint;
-
-JawboneGenericEventsAPI.prototype = {
-  get: function() {
+  var generic_events_get =  function(options, callback, fake) {
     // Undocumented...
     // GET /nudge/api/v.1.0/users/@me/generic_events
     // GET /nudge/api/v.1.0/generic_events/{event_xid}
-  },
-  create: function() {
+    if(good_params(options, callback)) {
+      var xid = options.xid;
+      var url = BASE_URL + (xid ? '/generic_events/' + xid : '/users/@me/generic_events?' + serialize(options));
+      api_get({ url: url, fake: fake }, callback);
+    }
+  };
+
+  var generic_events_create = function(data, callback, fake) {
     // POST /nudge/api/v.1.0/users/@me/generic_events
-  },
-  delete: function() {
+    if(good_params(data, callback)) {
+      var url = BASE_URL + '/users/@me/generic_events';
+      api_post({ url: url, fake: fake, data: data }, callback);
+    }
+  };
+
+  var generic_events_delete = function(options, callback, fake) {
     // DELETE /nudge/api/v.1.0/generic_events/{event_xid}
-  }
-};
+    if(good_params(options, callback)) {
+      var xid = options.xid;
+      if(!xid) {
+        return callback({ error: true, message: ERROR_NO_XID }, null);
+      }
+      else {
+        var url = BASE_URL + '/generic_events/' + xid;
+        api_delete({ url: url, fake: fake }, callback);
+      }
+    }
+  };
 
-var JawboneTimezoneAPI = APIEndPoint;
+  var cardiac_events_get = function(options, callback, fake) {
+    // GET /nudge/api/v.1.0/users/@me/cardiac_events
+    // GET /nudge/api/v.1.0/cardiac_events/{event_xid}
+    if(good_params(options, callback)) {
+      var xid = options.xid;
+      var url = BASE_URL + (xid ? '/cardiac_events/' + xid : '/users/@me/cardiac_events?' + serialize(options));
+      api_get({ url: url, fake: fake }, callback);
+    }
+  };
 
-JawboneTimezoneAPI.prototype = {
-  get: function() {
+  var cardiac_events_create = function(data, callback, fake) {
+    // POST /nudge/api/v.1.0/users/@me/cardiac_events
+    if(good_params(data, callback)) {
+      var url = BASE_URL + '/users/@me/cardiac_events';
+      api_post({ url: url, fake: fake, data: data }, callback);
+    }
+  };
+
+  var cardiac_events_delete = function(options, callback, fake) {
+    // DELETE /nudge/api/v.1.0/cardiac_events/{event_xid}
+    if(good_params(options, callback)) {
+      var xid = options.xid;
+      if(!xid) {
+        return callback({ error: true, message: ERROR_NO_XID }, null);
+      }
+      else {
+        var url = BASE_URL + '/cardiac_events/' + xid;
+        api_delete({ url: url, fake: fake }, callback);
+      }
+    }
+  };
+
+  var body_events_get = function(options, callback, fake) {
+    // GET /nudge/api/v.1.0/users/@me/body_events
+    // GET /nudge/api/v.1.0/body_events/{event_xid}
+    if(good_params(options, callback)) {
+      var xid = options.xid;
+      var url = BASE_URL + (xid ? '/body_events/' + xid : '/users/@me/body_events?' + serialize(options));
+      api_get({ url: url, fake: fake }, callback);
+    }
+  };
+
+  var body_events_create = function(data, callback, fake) {
+    // POST /nudge/api/v.1.0/users/@me/body_events
+    if(good_params(data, callback)) {
+      var url = BASE_URL + '/users/@me/body_events';
+      api_post({ url: url, fake: fake, data: data }, callback);
+    }
+  };
+
+  var body_events_delete = function(options, callback, fake) {
+    // DELETE /nudge/api/v.1.0/body_events/{event_xid}
+    if(good_params(options, callback)) {
+      var xid = options.xid;
+      if(!xid) {
+        return callback({ error: true, message: ERROR_NO_XID }, null);
+      }
+      else {
+        var url = BASE_URL + '/body_events/' + xid;
+        api_delete({ url: url, fake: fake }, callback);
+      }
+    }
+  };
+
+  var meals_get = function(options, callback, fake) {
+    // GET /nudge/api/v.1.0/users/@me/meals
+    // GET /nudge/api/v.1.0/meals/{meal_xid}
+    if(good_params(options, callback)) {
+      var xid = options.xid;
+      var url = BASE_URL + (xid ? '/meals/' + xid : '/users/@me/meals?' + serialize(options));
+      api_get({ url: url, fake: fake }, callback);
+    }
+  };
+
+  var meals_create = function(data, callback, fake) {
+    // POST /nudge/api/v.1.0/users/@me/meals
+    if(good_params(data, callback)) {
+      var url = BASE_URL + '/users/@me/meals';
+      api_post({ url: url, fake: fake, data: data }, callback);
+    }
+  };
+
+  var sleeps_get = function(options, callback, fake) {
+    // GET /nudge/api/v.1.0/users/@me/sleeps
+    // GET /nudge/api/v.1.0/sleeps/{sleep_xid}
+    if(good_params(options, callback)) {
+      var xid = options.xid;
+      var url = BASE_URL + (xid ? '/sleeps/' + xid : '/users/@me/sleeps?' + serialize(options));
+      api_get({ url: url, fake: fake }, callback);
+    }
+  };
+
+  var sleeps_create = function(data, callback, fake) {
+    // POST /nudge/api/users/@me/sleeps
+    if(good_params(data, callback)) {
+      var url = BASE_URL + '/users/@me/sleeps';
+      api_post({ url: url, fake: fake, data: data }, callback);
+    }
+  };
+
+
+  var sleeps_delete = function(options, callback, fake) {
+    // Undocumented! (but tested + works)
+    // DELETE /nudge/api/v.1.0/sleeps/{sleep_xid}
+    if(good_params(options, callback)) {
+      var xid = options.xid;
+      if(!xid) {
+        return callback({ error: true, message: ERROR_NO_XID }, null);
+      }
+      else {
+        var url = BASE_URL + '/sleeps/' + xid;
+        api_delete({ url: url, fake: fake }, callback);
+      }
+    }
+  };
+
+  var sleeps_image = function(options, callback, fake) {
+    // GET /nudge/api/v.1.0/sleeps/{sleep_xid}/image
+    if(good_params(options, callback)) {
+      var xid = options.xid;
+      if(!xid) {
+        return callback({ error: true, message: ERROR_NO_XID }, null);
+      }
+      else {
+        var url = BASE_URL + '/sleeps/' + xid + '/image';
+        api_get({ url: url, fake: fake }, callback);
+      }
+    }
+  };
+
+  var sleeps_snapshot = function(options, callback, fake) {
+    // GET /nudge/api/v.1.0/sleeps/{sleep_xid}/snapshot
+    if(good_params(options, callback)) {
+      var xid = options.xid;
+      if(!xid) {
+        return callback({ error: true, message: ERROR_NO_XID }, null);
+      }
+      else {
+        var url = BASE_URL + '/sleeps/' + xid + '/snapshot';
+        api_get({ url: url, fake: fake }, callback);
+      }
+    }
+  };
+
+  var workouts_get = function(options, callback, fake) {
+    // GET /nudge/api/v.1.0/users/@me/workouts
+    // GET /nudge/api/v.1.0/workouts/{workout_xid}
+    if(good_params(options, callback)) {
+      var xid = options.xid;
+      var url = BASE_URL + (xid ? '/workouts/' + xid : '/users/@me/workouts?' + serialize(options));
+      api_get({ url: url, fake: fake }, callback);
+    }
+  };
+
+  var workouts_create = function(options, callback, fake) {
+    // POST /nudge/api/v.1.0/users/@me/workouts
+    if(good_params(data, callback)) {
+      var url = BASE_URL + '/users/@me/workouts';
+      api_post({ url: url, fake: fake, data: data }, callback);
+    }
+  };
+
+  var workouts_image = function(options, callback, fake) {
+    // GET /nudge/api/v.1.0/workouts/{workout_xid}/image
+    if(good_params(options, callback)) {
+      var xid = options.xid;
+      if(!xid) {
+        return callback({ error: true, message: ERROR_NO_XID }, null);
+      }
+      else {
+        var url = BASE_URL + '/workouts/' + xid + '/image';
+        api_get({ url: url, fake: fake }, callback);
+      }
+    }
+  };
+
+  var workouts_snapshot = function(options, callback, fake) {
+    // GET /nudge/api/v.1.0/workouts/{workout_xid}/snapshot
+    if(good_params(options, callback)) {
+      var xid = options.xid;
+      if(!xid) {
+        return callback({ error: true, message: ERROR_NO_XID }, null);
+      }
+      else {
+        var url = BASE_URL + '/workouts/' + xid + '/snapshot';
+        api_get({ url: url, fake: fake }, callback);
+      }
+    }
+  };
+
+  var mood_get = function(options, callback, fake) {
+    // GET /nudge/api/v.1.0/users/@me/mood
+    if(good_params(options, callback)) {
+      var url = BASE_URL + '/users/@me/mood';
+      api_get({ url: url, fake: fake }, callback);
+    }
+  };
+
+  var friends_get = function(options, callback, fake) {
+    // GET /nudge/api/v.1.0/users/@me/friends
+    if(good_params(options, callback)) {
+      var url = BASE_URL + '/users/@me/friends';
+      api_get({ url: url, fake: fake }, callback);
+    }
+  };
+
+  var timezone_get = function(options, callback, fake) {
     // GET /nudge/api/v.1.0/users/@me/timezone
-  }
-};
+    if(good_params(options, callback)) {
+      var url = BASE_URL + '/users/@me/timezone';
+      api_get({ url: url, fake: fake }, callback);
+    }
+  };
 
-module.exports = function(options) {
-  return new JawboneUp(options);
+  return {
+    get client_id() {
+      return self.client_id;
+    },
+    set client_id(id) {
+      if(typeof(id) === 'string') {
+        self.client_id = id;
+      }
+    },
+    get client_secret() {
+      return self.client_secret;
+    },
+    set client_secret(secret) {
+      if(typeof(secret) === 'string') {
+        self.client_secret = secret;
+      }
+    },
+    get access_token() {
+      return self.access_token;
+    },
+    set access_token(token) {
+      if(typeof(token) === 'string') {
+        self.access_token = token;
+      }
+    },
+    get version() {
+      return version;
+    },
+    moves: {
+      get: moves_get
+    },
+    timezone: {
+      get: timezone_get
+    },
+    sleeps: {
+      create: sleeps_create,
+      'delete': sleeps_delete // undocumented
+    }
+  };
 };
