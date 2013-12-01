@@ -5,7 +5,9 @@ Jawbone UP API Node.js Library
 
 ## Installation
 
-`npm install jawbone-up --save`
+Just like any ol' node module:
+
+`npm install jawbone-up`
 
 ## Usage
 
@@ -24,14 +26,19 @@ var up = require('jawbone-up')(options);
 ## User information
 
 ```javascript
+// get info related to authenticated user
 up.me({}, callback)             // GET /nudge/api/v.1.0/users/@me
 
+// get friends of user
 up.friends({}, callback)        // GET /nudge/api/v.1.0/users/@me/friends
 
+// get mood of user
 up.mood.get({}, callback)       // GET /nudge/api/v.1.0/users/@me/mood
 
+// get trends of user
 up.trends({}, callback)         // GET /nudge/api/v.1.0/users/@me/trends
 
+// get goals of user
 up.goals({}, callback)          // GET /nudge/api/v.1.0/users/@me/goals
 ```
 
@@ -54,7 +61,6 @@ up.moves.snapshot({ xid : move_xid }, callback) // GET /nudge/api/v.1.0/moves/{m
 ## Workouts
 
 ```javascript
-
 // get all workouts (paginated results)
 up.workouts.get({}, callback)                         // GET /nudge/api/v.1.0/users/@me/workouts
 
@@ -74,14 +80,22 @@ up.workouts.snapshot({ xid : workout_xid }, callback) // GET /nudge/api/v.1.0/wo
 ## Sleeps
 
 ```javascript
+// get all sleeps (paginated results)
 up.sleeps.get({}, callback)                          // GET /nudge/api/v.1.0/users/@me/sleeps
 
+// get a specific sleep
 up.sleeps.get({ xid : sleep_xid }, callback)          // GET /nudge/api/v.1.0/sleeps/{sleep_xid}
 
+// create a new sleep
+up.sleeps.create(options, callback)                 // POST /nudge/api/v.1.0/users/@me/sleeps
+
+// get a specific sleep image
 up.sleeps.image({ xid : sleep_xid }, callback)        // GET /nudge/api/v.1.0/sleeps/{sleep_xid}/image
 
+// get a specific sleep snapshot
 up.sleeps.snapshot({ xid : sleep_xid }, callback)     // GET /nudge/api/v.1.0/sleeps/{sleep_xid}/snapshot
 
+// delete a specific sleep
 up.sleeps.delete({ xid : sleep_xid }, callback)       // DELETE /nudge/api/v.1.0/sleeps/{sleep_xid}
 ```
 
