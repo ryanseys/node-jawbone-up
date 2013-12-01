@@ -4,10 +4,10 @@ node-jawbone-up
 Jawbone UP API Node.js Library
 
 ```javascript
-var up_config = {
-  client_id:     'xxx', // UP application api id
-  client_secret: 'yyy', // UP application api secret
-  access_token:  'zzz'  // access token for specific user
+var options = {
+  access_token:  'zzz'   // Required: Access token for specific user
+  client_id:     'xxx', // Optional: UP application api id (not used)
+  client_secret: 'yyy', // Optional: UP application api secret (not used)
 }
 
 var up = require('jawbone-up')(options);
