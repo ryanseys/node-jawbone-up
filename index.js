@@ -698,7 +698,7 @@ module.exports = function(options) {
   /**
    * Get info of user.
    *
-   * @method me
+   * @method me.get
    * @param  {Object}   options  All options to be used in the request.
    * @param  {Function} callback A callback to fire when response is recieved.
    */
@@ -739,7 +739,9 @@ module.exports = function(options) {
     },
 
     /** @class me */
-    me: me_get,
+    me: {
+      get: me_get,
+    },
     /** @class moves */
     moves: {
       get: moves_get,
