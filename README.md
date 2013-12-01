@@ -24,6 +24,8 @@ var up = require('jawbone-up')(options);
 
 # Documentation
 
+Generated docs hosted here: [ryanseys.github.io/node-jawbone-up/docs](http://ryanseys.github.io/node-jawbone-up/docs/)
+
 You can generate docs yourself:
 
 ```
