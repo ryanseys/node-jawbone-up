@@ -3,6 +3,11 @@ node-jawbone-up
 
 Jawbone UP API Node.js Library
 
+## Installation
+
+`npm install jawbone-up --save`
+
+
 ```javascript
 var options = {
   access_token:  'zzz'   // Required: Access token for specific user
