@@ -56,6 +56,8 @@ up.goals({}, callback)          // GET /nudge/api/v.1.0/users/@me/goals
 
 ## Moves
 
+[Moves Documentation](http://ryanseys.github.io/node-jawbone-up/docs/moves.html)
+
 ```javascript
 // get all moves (paginated results)
 up.moves.get({}, callback)                      // GET /nudge/api/v.1.0/users/@me/moves
@@ -71,6 +73,8 @@ up.moves.snapshot({ xid : move_xid }, callback) // GET /nudge/api/v.1.0/moves/{m
 ```
 
 ## Workouts
+
+[Workouts Documentation](http://ryanseys.github.io/node-jawbone-up/docs/workouts.html)
 
 ```javascript
 // get all workouts (paginated results)
@@ -90,6 +94,8 @@ up.workouts.snapshot({ xid : workout_xid }, callback) // GET /nudge/api/v.1.0/wo
 ```
 
 ## Sleeps
+
+[Sleeps Documentation](http://ryanseys.github.io/node-jawbone-up/docs/sleeps.html)
 
 ```javascript
 // get all sleeps (paginated results)
@@ -113,6 +119,8 @@ up.sleeps.delete({ xid : sleep_xid }, callback)       // DELETE /nudge/api/v.1.0
 
 ## Meals
 
+[Meals Documentation](http://ryanseys.github.io/node-jawbone-up/docs/meals.html)
+
 ```javascript
 // get all meals (paginated results)
 up.meals.get({}, callback)                   // GET /nudge/api/v.1.0/users/@me/meals
@@ -125,6 +133,8 @@ up.meals.get({ xid : meal_xid }, callback)   // GET /nudge/api/v.1.0/meals/{meal
 ```
 
 ## Body Composition
+
+[Body Events Documentation](http://ryanseys.github.io/node-jawbone-up/docs/events.body.html)
 
 ```javascript
 // get all body events (paginated results)
@@ -142,6 +152,8 @@ up.events.body.delete({ xid : event_xid }, callback)  // DELETE /nudge/api/v.1.0
 
 ## Cardiac Metrics
 
+[Cardiac Events Documentation](http://ryanseys.github.io/node-jawbone-up/docs/events.cardiac.html)
+
 ```javascript
 // get all cardiac events (paginated results)
 up.events.cardiac.get({}, callback)                      // GET /nudge/api/v.1.0/users/@me/cardiac_events
@@ -157,6 +169,8 @@ up.events.cardiac.delete({ xid : event_xid }, callback)  // DELETE /nudge/api/v.
 ```
 
 ## Generic Events
+
+[Generic Events Documentation](http://ryanseys.github.io/node-jawbone-up/docs/events.generic.html)
 
 ```javascript
 // get all generic events (paginated results)
@@ -174,6 +188,8 @@ up.events.generic.delete({ xid : event_xid }, callback)  // DELETE /nudge/api/v.
 
 ## Mood
 
+[Mood Documentation](http://ryanseys.github.io/node-jawbone-up/docs/moods.html)
+
 ```javascript
 // get all moods (paginated results)
 up.mood.get({}, callback)                     // GET /nudge/api/v.1.0/users/@me/mood
@@ -189,6 +205,8 @@ up.mood.delete({ xid : mood_xid }, callback)  // DELETE /nudge/api/v.1.0/mood/{m
 ```
 
 ## Time Zone
+
+[Timezone Documentation](http://ryanseys.github.io/node-jawbone-up/docs/timezone.html)
 
 ```javascript
 // get a user's timezone
