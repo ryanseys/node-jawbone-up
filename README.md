@@ -15,7 +15,8 @@ it will apparently last for a **year**.
 
 ```javascript
 var options = {
-  access_token:  'zzz'  // **Required**: Access token for specific user.
+  // ** REQUIRED **
+  access_token:  'xyz'  // Access token for specific user
 }
 
 var up = require('jawbone-up')(options);
