@@ -2,7 +2,7 @@
 
 Jawbone UP API Node.js Library
 
-![https://nodei.co/npm/jawbone-up.png](https://npmjs.org/package/jawbone-up)
+[![NPM](https://nodei.co/npm/jawbone-up.png)](https://npmjs.org/package/jawbone-up)
 
 ## Installation
 
