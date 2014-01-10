@@ -43,6 +43,30 @@ node_modules/.bin/jsdoc . -d docs
 
 Or see below for an overview...
 
+The callback function will follow the format as specified below:
+
+```javascript
+function callback(err, body) {
+  // do stuff
+}
+```
+
+Example callback:
+
+```javascript
+// Callback function returns an error if applicable
+// and/or the body of the API response
+function callback(err, body) {
+  if(err) {
+    console.log('Error: ' + err);
+  }
+  else {
+    var data = JSON.parse(body).data;
+    // do something with data
+  }
+}
+```
+
 ## User information
 
 ```javascript
