@@ -7,14 +7,13 @@
 
 const packagejson = require('./package.json');
 const request = require('request');
+const BASE_URL = 'https://jawbone.com/nudge/api/v.1.0';
+const ERROR_NO_XID = 'Error: No xid provided. Please specify a xid.';
+const ERROR_NOT_IMPLEMENTED = 'Error: Not yet implemented.';
+const ERROR_BAD_PARAMS_CB = 'Error: Bad parameters. Callback function required.';
+const ERROR_BAD_PARAMS_OPT = 'Error: Bad parameters. Options object required.';
 
 module.exports = function(options) {
-  const BASE_URL = 'https://jawbone.com/nudge/api/v.1.0';
-  const ERROR_NO_XID = 'Error: No xid provided. Please specify a xid.';
-  const ERROR_NOT_IMPLEMENTED = 'Error: Not yet implemented.';
-  const ERROR_BAD_PARAMS_CB = 'Error: Bad parameters. Callback function required.';
-  const ERROR_BAD_PARAMS_OPT = 'Error: Bad parameters. Options object required.';
-
   var self = this;
 
   if(typeof(options) !== 'object') {
@@ -55,7 +54,7 @@ module.exports = function(options) {
    * @param  {Function} callback Callback function part of params to check.
    * @return {Boolean}           true if params are good, false otherwise.
    */
-  var good_params = function(options, callback, fake) {
+  var good_params = function(options, callback) {
     if(typeof(callback) !== 'function') {
       return false;
     }
@@ -709,31 +708,38 @@ module.exports = function(options) {
     }
   };
 
-  var to_export = {
+  return {
+
     get client_id() {
       return self.client_id;
     },
+
     set client_id(id) {
       if(typeof(id) === 'string') {
         self.client_id = id;
       }
     },
+
     get client_secret() {
       return self.client_secret;
     },
+
     set client_secret(secret) {
       if(typeof(secret) === 'string') {
         self.client_secret = secret;
       }
     },
+
     get access_token() {
       return self.access_token;
     },
+
     set access_token(token) {
       if(typeof(token) === 'string') {
         self.access_token = token;
       }
     },
+
     get version() {
       return version;
     },
@@ -814,6 +820,4 @@ module.exports = function(options) {
       'delete': sleeps_delete // undocumented
     }
   };
-
-  return to_export;
 };
