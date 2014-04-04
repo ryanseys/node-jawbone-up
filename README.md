@@ -2,6 +2,12 @@
 
 Jawbone UP API Node.js Library
 
+<b>
+NOTE: The UP API was recently updated to version 1.1, although they will continue to support version 1.0. This library is currently operational under API version 1.0 however I plan to update it to 1.1 once exams at school pass. =)
+</b>
+
+If you would like to contribute to this project in any way, including to update it to support API v1.1, please send me a pull request!
+
 Official UP API: [jawbone.com/up/developer](https://jawbone.com/up/developer/)
 
 [![Build Status](https://secure.travis-ci.org/ryanseys/node-jawbone-up.png)](http://travis-ci.org/ryanseys/node-jawbone-up)
