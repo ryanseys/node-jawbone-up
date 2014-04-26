@@ -23,6 +23,8 @@ See below for an example of how this could be done. This library does not
 assist in getting an `access_token` through OAuth, but once you get the token,
 it will apparently last for a **year**.
 
+A `client_secret` attribute is required if you would like to use `up.refreshToken.get()` to get new refresh tokens. It is not required otherwise.
+
 ```javascript
 var options = {
   // ** REQUIRED **
@@ -270,20 +272,6 @@ Then you may run all the tests with:
 npm test
 ```
 
-# Contributing
-
-I would love contributions. Filing issues [on Github](https://github.com/ryanseys/node-jawbone-up/issues)
-or sending pull requests is always greatly appreciated.
-
 # License
 
-The MIT License (MIT)
-
-Copyright (c) 2013 Ryan Seys
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
+[MIT](https://github.com/ryanseys/node-jawbone-up/blob/master/LICENSE.md) &copy; 2014 Ryan Seys
