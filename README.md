@@ -37,25 +37,6 @@ var up = require('jawbone-up')(options);
 
 Official UP API can be found at [jawbone.com/up/developer](https://jawbone.com/up/developer/)
 
-Generated documentation for this library is hosted at [ryanseys.github.io/node-jawbone-up/docs](http://ryanseys.github.io/node-jawbone-up/docs/)
-
-You can also generate the docs yourself:
-
-```
-npm install
-node_modules/.bin/jsdoc . -d docs
-```
-
-Or see below for an overview...
-
-The callback function will follow the format as specified below:
-
-```javascript
-function callback(err, body) {
-  // do stuff
-}
-```
-
 Example callback:
 
 ```javascript
@@ -266,9 +247,7 @@ Added in v.1.1
 ```javascript
 // create a webhook
 up.webhook.create(webhook_url, callback) // POST /users/@me/pubsub?webhook={webhook_url};
-```
 
-```javascript
 // delete a webhook
 up.webhook.delete(callback) // DELETE /users/@me/pubsub
 ```
