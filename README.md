@@ -4,8 +4,6 @@ Jawbone UP API Node.js Library
 
 API Version: v.1.1
 
-If you would like to contribute to this project in any way, including to update it to support API v1.1, please send me a pull request!
-
 Official UP API: [jawbone.com/up/developer](https://jawbone.com/up/developer/)
 
 [![Build Status](https://secure.travis-ci.org/ryanseys/node-jawbone-up.png)](http://travis-ci.org/ryanseys/node-jawbone-up)
