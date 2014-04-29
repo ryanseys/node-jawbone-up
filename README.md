@@ -33,7 +33,7 @@ var options = {
 var up = require('jawbone-up')(options);
 ```
 
-# Documentation
+## Documentation
 
 Official UP API can be found at [jawbone.com/up/developer](https://jawbone.com/up/developer/)
 
@@ -53,7 +53,7 @@ function callback(err, body) {
 }
 ```
 
-## User information
+### User information
 
 ```javascript
 // get user info
@@ -72,7 +72,7 @@ up.trends.get({}, callback)         // GET /nudge/api/v.1.1/users/@me/trends
 up.goals.get({}, callback)          // GET /nudge/api/v.1.1/users/@me/goals
 ```
 
-## Moves
+### Moves
 
 ```javascript
 // get all moves (paginated results)
@@ -88,7 +88,7 @@ up.moves.image({ xid : move_xid }, callback)    // GET /nudge/api/v.1.1/moves/{m
 up.moves.ticks({ xid : move_xid }, callback) // GET /nudge/api/v.1.1/moves/{move_xid}/ticks
 ```
 
-## Workouts
+### Workouts
 
 ```javascript
 // get all workouts (paginated results)
@@ -110,7 +110,7 @@ up.workouts.image({ xid : workout_xid }, callback)    // GET /nudge/api/v.1.1/wo
 up.workouts.ticks({ xid : workout_xid }, callback) // GET /nudge/api/v.1.1/workouts/{workout_xid}/ticks
 ```
 
-## Sleeps
+### Sleeps
 
 ```javascript
 // get all sleeps (paginated results)
@@ -132,7 +132,7 @@ up.sleeps.ticks({ xid : sleep_xid }, callback)     // GET /nudge/api/v.1.1/sleep
 up.sleeps.delete({ xid : sleep_xid }, callback)       // DELETE /nudge/api/v.1.1/sleeps/{sleep_xid}
 ```
 
-## Meals
+### Meals
 
 ```javascript
 // get all meals (paginated results)
@@ -148,7 +148,7 @@ up.meals.update(options, callback)           // POST https://jawbone.com/nudge/a
 up.meals.get({ xid : meal_xid }, callback)   // GET /nudge/api/v.1.1/meals/{meal_xid}
 ```
 
-## Body Composition
+### Body Composition
 
 ```javascript
 // get all body events (paginated results)
@@ -164,7 +164,7 @@ up.events.body.create(options, callback)              // POST /nudge/api/v.1.1/u
 up.events.body.delete({ xid : event_xid }, callback)  // DELETE /nudge/api/v.1.1/body_events/{event_xid}
 ```
 
-## Cardiac Metrics
+### Cardiac Metrics
 
 ```javascript
 // get all cardiac events (paginated results)
@@ -180,7 +180,7 @@ up.events.cardiac.create(options, callback)              // POST /nudge/api/v.1.
 up.events.cardiac.delete({ xid : event_xid }, callback)  // DELETE /nudge/api/v.1.1/cardiac_events/{event_xid}
 ```
 
-## Generic Events
+### Generic Events
 
 ```javascript
 // get all generic events (paginated results)
@@ -199,7 +199,7 @@ up.events.generic.update(options, callback)              // POST /nudge/api/v.1.
 up.events.generic.delete({ xid : event_xid }, callback)  // DELETE /nudge/api/v.1.1/generic_events/{event_xid}
 ```
 
-## Mood
+### Mood
 
 ```javascript
 // get all moods (paginated results)
@@ -215,7 +215,7 @@ up.mood.create(options, callback)             // POST /nudge/api/v.1.1/users/@me
 up.mood.delete({ xid : mood_xid }, callback)  // DELETE /nudge/api/v.1.1/mood/{mood_xid}
 ```
 
-## Time Zone
+### Time Zone
 
 ```javascript
 // get a user's timezone
@@ -231,7 +231,7 @@ Added in v.1.1
 up.refreshToken.get(callback) // POST /nudge/api/v.1.1/users/@me/refreshToken
 ```
 
-## Settings
+### Settings
 
 Added in v.1.1
 
@@ -240,7 +240,7 @@ Added in v.1.1
 up.settings.get(callback) // GET /nudge/api/v.1.1/users/@me/settings
 ```
 
-## Webhook
+### Webhook
 
 Added in v.1.1
 
