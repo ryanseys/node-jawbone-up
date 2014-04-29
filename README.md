@@ -1,6 +1,6 @@
 # node-jawbone-up
 
-Jawbone UP API Node.js Library
+Jawbone UP API Node.js Client
 
 API Version: v.1.1
 
@@ -252,7 +252,7 @@ up.webhook.create(webhook_url, callback) // POST /users/@me/pubsub?webhook={webh
 up.webhook.delete(callback) // DELETE /users/@me/pubsub
 ```
 
-# Tests
+## Tests
 
 Tests can be found in the `test` folder.
 
@@ -270,6 +270,6 @@ Then you may run all the tests with:
 npm test
 ```
 
-# License
+## License
 
 [MIT](https://github.com/ryanseys/node-jawbone-up/blob/master/LICENSE.md) &copy; 2014 Ryan Seys
