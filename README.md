@@ -12,7 +12,9 @@ Official UP API: [jawbone.com/up/developer](https://jawbone.com/up/developer/)
 
 ## Installation
 
-`npm install jawbone-up`
+``` sh
+npm install jawbone-up --save
+```
 
 ## Usage
 
