@@ -6,9 +6,9 @@ API Version: v.1.1
 
 Official UP API: [jawbone.com/up/developer](https://jawbone.com/up/developer/)
 
-[![Build Status](https://secure.travis-ci.org/ryanseys/node-jawbone-up.png)](http://travis-ci.org/ryanseys/node-jawbone-up)
+[![Build Status](https://travis-ci.org/ryanseys/node-jawbone-up.svg?branch=master)](http://travis-ci.org/ryanseys/node-jawbone-up)
 
-[![NPM](https://nodei.co/npm/jawbone-up.png)](https://npmjs.org/package/jawbone-up)
+[![NPM](https://nodei.co/npm/jawbone-up.svg?downloads=true)](https://npmjs.org/package/jawbone-up)
 
 ## Installation
 
