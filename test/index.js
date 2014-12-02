@@ -8,18 +8,38 @@ var baseApi = nock('https://jawbone.com:443');
 describe('up', function(){
   describe('.moves', function(){
     describe('.get()', function(){
-      it('should return correct url', function(){
+      it('should call correct url', function(done){
+        var api = baseApi.matchHeader('Accept', 'application/json')
+          .get('/nudge/api/v.1.1/users/@me/moves?')
+          .reply(200, 'OK!');
+
         up.moves.get({}, function(err, body) {
-          body.should.equal('https://jawbone.com/nudge/api/v.1.1/users/@me/moves?');
-        }, debug);
+          (err === null).should.be.true;
+          body.should.equal('OK!');
+
+          api.isDone().should.be.true;
+          api.pendingMocks().should.be.empty;
+
+          done();
+        });
       });
     });
 
     describe('.get({ xid: 123 })', function(){
-      it('should return correct url', function(){
+      it('should return correct url', function(done){
+        var api = baseApi.matchHeader('Accept', 'application/json')
+          .get('/nudge/api/v.1.1/moves/123')
+          .reply(200, 'OK!');
+
         up.moves.get({ xid: 123 }, function(err, body) {
-          body.should.equal('https://jawbone.com/nudge/api/v.1.1/moves/123');
-        }, debug);
+          (err === null).should.be.true;
+          body.should.equal('OK!');
+
+          api.isDone().should.be.true;
+          api.pendingMocks().should.be.empty;
+
+          done();
+        });
       });
     });
   });
