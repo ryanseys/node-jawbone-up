@@ -256,7 +256,7 @@ module.exports = function(options) {
 
     /** @class me */
     me: {
-      get: create_getter(''),
+      get: create_getter('')
     },
     /** @class moves */
     moves: {
