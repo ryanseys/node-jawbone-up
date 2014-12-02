@@ -1,10 +1,11 @@
 var config = require('./config');
 var should = require('should');
-var debug = false;
+var nock = require('nock');
 var up = require('../index')(config);
 
-describe('up', function(){
+var baseApi = nock('https://jawbone.com:443');
 
+describe('up', function(){
   describe('.moves', function(){
     describe('.get()', function(){
       it('should return correct url', function(){
