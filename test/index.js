@@ -4,7 +4,8 @@ var assert = require('assert');
 var nock = require('nock');
 
 nock.disableNetConnect();
-var baseApi = nock('https://jawbone.com:443');
+var baseApi = nock('https://jawbone.com')
+  .matchHeader('Authorization', /.*/);
 
 describe('up', function(){
   describe('.moves', function(){
