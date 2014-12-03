@@ -11,8 +11,7 @@
   "devDependencies": {
     "jsdoc": "git+https://github.com/jsdoc3/jsdoc.git",
     "mocha": "~1.14.0",
-    "nock": "^0.51.0",
-    "should": "~2.1.0"
+    "nock": "^0.51.0"
   },
   "optionalDependencies": {},
   "engines": {

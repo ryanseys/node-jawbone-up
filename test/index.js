@@ -1,7 +1,7 @@
 var config = require('./config');
-var should = require('should');
-var nock = require('nock');
 var up = require('../index')(config);
+var assert = require('assert');
+var nock = require('nock');
 
 nock.disableNetConnect();
 var baseApi = nock('https://jawbone.com:443');
@@ -15,8 +15,8 @@ describe('up', function(){
           .reply(200, 'OK!');
 
         up.moves.get({}, function(err, body) {
-          (err === null).should.be.true;
-          body.should.equal('OK!');
+          assert.equal(err, void 0);
+          assert.equal(body, 'OK!');
 
           api.done();
 
@@ -32,8 +32,8 @@ describe('up', function(){
           .reply(200, 'OK!');
 
         up.moves.get({ xid: 123 }, function(err, body) {
-          (err === null).should.be.true;
-          body.should.equal('OK!');
+          assert.equal(err, void 0);
+          assert.equal(body, 'OK!');
 
           api.done();
 
