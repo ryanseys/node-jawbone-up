@@ -3,6 +3,7 @@ var should = require('should');
 var nock = require('nock');
 var up = require('../index')(config);
 
+nock.disableNetConnect();
 var baseApi = nock('https://jawbone.com:443');
 
 describe('up', function(){
@@ -17,8 +18,7 @@ describe('up', function(){
           (err === null).should.be.true;
           body.should.equal('OK!');
 
-          api.isDone().should.be.true;
-          api.pendingMocks().should.be.empty;
+          api.done();
 
           done();
         });
@@ -35,8 +35,7 @@ describe('up', function(){
           (err === null).should.be.true;
           body.should.equal('OK!');
 
-          api.isDone().should.be.true;
-          api.pendingMocks().should.be.empty;
+          api.done();
 
           done();
         });
