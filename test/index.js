@@ -1,5 +1,4 @@
-var config = require('./config');
-var up = require('../index')(config);
+var up = require('../index')({});
 var assert = require('assert');
 var nock = require('nock');
 
