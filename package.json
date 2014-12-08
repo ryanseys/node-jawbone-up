@@ -10,8 +10,8 @@
   "main": "index.js",
   "devDependencies": {
     "jsdoc": "git+https://github.com/jsdoc3/jsdoc.git",
-    "should": "~2.1.0",
-    "mocha": "~1.14.0"
+    "mocha": "^2.0.1",
+    "nock": "^0.51.0"
   },
   "optionalDependencies": {},
   "engines": {

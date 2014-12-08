@@ -78,21 +78,16 @@ module.exports = function(options) {
    * @param  {Function} callback Function to callback with response.
    */
   var api_get = function(options, callback) {
-    if(!options.fake) {
-      request({
-        url: options.url,
-        headers: {
-          'Authorization': 'Bearer ' + access_token,
-          'Accept': 'application/json'
-        }
-      },
-      function(error, response, body) {
-        callback(error, body);
-      });
-    }
-    else {
-      callback(null, options.url);
-    }
+    request({
+      url: options.url,
+      headers: {
+        'Authorization': 'Bearer ' + access_token,
+        'Accept': 'application/json'
+      }
+    },
+    function(error, response, body) {
+      callback(error, body);
+    });
   };
 
   /**
@@ -105,23 +100,18 @@ module.exports = function(options) {
    * @param  {Function} callback Function to callback with response.
    */
   var api_post = function(options, callback) {
-    if(!options.fake) {
-      request({
-        method: 'post',
-        url: options.url,
-        headers: {
-          'Authorization': 'Bearer ' + access_token,
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        form: options.data
+    request({
+      method: 'post',
+      url: options.url,
+      headers: {
+        'Authorization': 'Bearer ' + access_token,
+        'Content-Type': 'application/x-www-form-urlencoded'
       },
-      function(error, response, body) {
-        callback(error, body);
-      });
-    }
-    else {
-      callback(null, options.url);
-    }
+      form: options.data
+    },
+    function(error, response, body) {
+      callback(error, body);
+    });
   };
 
   /**
@@ -132,44 +122,39 @@ module.exports = function(options) {
    * @param  {Function} callback Function to callback with response.
    */
   var api_delete = function(options, callback) {
-    if(!options.fake) {
-      request({
-        method: 'delete',
-        url: options.url,
-        headers: {
-          'Authorization': 'Bearer ' + access_token
-        }
-      },
-      function(error, response, body) {
-        callback(error, body);
-      });
-    }
-    else {
-      callback(null, options.url);
-    }
+    request({
+      method: 'delete',
+      url: options.url,
+      headers: {
+        'Authorization': 'Bearer ' + access_token
+      }
+    },
+    function(error, response, body) {
+      callback(error, body);
+    });
   };
 
   function create_getter_xid(str) {
-    return function(options, callback, fake) {
+    return function(options, callback) {
       if(good_params(options, callback)) {
         var xid = options.xid;
         var url = BASE_URL + (xid ? '/' + str + '/' + xid : '/users/@me/' + str + '?' + serialize(options));
-        api_get({ url: url, fake: fake }, callback);
+        api_get({ url: url }, callback);
       }
     };
   }
 
   function create_getter(str) {
-    return function(options, callback, fake) {
+    return function(options, callback) {
       if(good_params(options, callback)) {
         var url = BASE_URL + '/users/@me/' + str;
-        api_get({ url: url, fake: fake }, callback);
+        api_get({ url: url }, callback);
       }
     };
   }
 
   function create_getter_type(obj_str, str_type) {
-    return function(options, callback, fake) {
+    return function(options, callback) {
       if(good_params(options, callback)) {
         var xid = options.xid;
         if(!xid) {
@@ -177,23 +162,23 @@ module.exports = function(options) {
         }
         else {
           var url = BASE_URL + '/'+ obj_str + '/' + xid + '/' + str_type;
-          api_get({ url: url, fake: fake }, callback);
+          api_get({ url: url }, callback);
         }
       }
     };
   }
 
   function create_creator(obj_str) {
-    return function(data, callback, fake) {
+    return function(data, callback) {
       if(good_params(data, callback)) {
         var url = BASE_URL + '/users/@me/' + obj_str;
-        api_post({ url: url, fake: fake, data: data }, callback);
+        api_post({ url: url, data: data }, callback);
       }
     };
   }
 
   function create_deletor(obj_str) {
-    return function(options, callback, fake) {
+    return function(options, callback) {
       if(good_params(options, callback)) {
         var xid = options.xid;
         if(!xid) {
@@ -201,7 +186,7 @@ module.exports = function(options) {
         }
         else {
           var url = BASE_URL + '/' + obj_str + '/' + xid;
-          api_delete({ url: url, fake: fake }, callback);
+          api_delete({ url: url }, callback);
         }
       }
     };
@@ -225,7 +210,7 @@ module.exports = function(options) {
   var get_refreshToken = function(callback) {
     if(client_secret) {
       var url = BASE_URL + '/users/@me/refreshToken';
-      api_post({ url: url, fake: false, data: { secret: client_secret } }, callback);
+      api_post({ url: url, data: { secret: client_secret } }, callback);
     }
     else {
       var error = { error: true, message: ERROR_NO_CLIENT_SECRET };
@@ -246,10 +231,10 @@ module.exports = function(options) {
     }
   };
 
-  var delete_webhook = function(callback, fake) {
+  var delete_webhook = function(callback) {
     if(good_params(options, callback)) {
       var url = BASE_URL + '/users/@me/pubsub';
-      api_delete({ url: url, fake: fake }, callback);
+      api_delete({ url: url }, callback);
     }
   };
 
@@ -271,7 +256,7 @@ module.exports = function(options) {
 
     /** @class me */
     me: {
-      get: create_getter(''),
+      get: create_getter('')
     },
     /** @class moves */
     moves: {
