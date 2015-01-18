@@ -24,9 +24,9 @@ module.exports = function(options) {
   }
 
   var version = packagejson.version;
-  this.client_id = options.client_id;
-  this.client_secret = options.client_secret;
-  this.access_token = options.access_token;
+  var client_id = options.client_id;
+  var client_secret = options.client_secret;
+  var access_token = options.access_token;
 
   /**
    * Serializes an object into a parameter string
@@ -241,12 +241,12 @@ module.exports = function(options) {
   return {
 
     get access_token() {
-      return self.access_token;
+      return access_token;
     },
 
     set access_token(token) {
       if(typeof(token) === 'string') {
-        self.access_token = token;
+        access_token = token;
       }
     },
 
