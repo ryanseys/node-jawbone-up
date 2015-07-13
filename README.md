@@ -166,21 +166,12 @@ up.events.body.create(options, callback)              // POST /nudge/api/v.1.1/u
 up.events.body.delete({ xid : event_xid }, callback)  // DELETE /nudge/api/v.1.1/body_events/{event_xid}
 ```
 
-### Cardiac Metrics
+### Heart Rate
 
 ```javascript
-// get all cardiac events (paginated results)
-up.events.cardiac.get({}, callback)                      // GET /nudge/api/v.1.1/users/@me/cardiac_events
+// get all heart rates (paginated results)
+up.heartrates.get({}, callback)                      // GET /nudge/api/v.1.1/users/@me/heartrates
 
-// get a specific cardiac event
-up.events.cardiac.get({ xid : event_xid }, callback)     // GET /nudge/api/v.1.1/cardiac_events/{event_xid}
-
-// create a new cardiac event
-up.events.cardiac.create(options, callback)              // POST /nudge/api/v.1.1/users/@me/cardiac_events
-
-// delete a specific cardiac event
-up.events.cardiac.delete({ xid : event_xid }, callback)  // DELETE /nudge/api/v.1.1/cardiac_events/{event_xid}
-```
 
 ### Generic Events
 

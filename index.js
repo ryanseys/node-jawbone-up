@@ -271,6 +271,9 @@ module.exports = function(options) {
       'delete': create_deletor('meals'),
       update: create_updater('meals')
     },
+    heartrates: {
+      get: create_getter_xid('heartrates')
+    },
     /** @class events */
     events: {
       /** @class events.body */
@@ -278,12 +281,6 @@ module.exports = function(options) {
         get: create_getter_xid('body_events'),
         create: create_creator('body_events'),
         'delete': create_deletor('body_events')
-      },
-      /** @class events.cardiac */
-      cardiac: {
-        get: create_getter_xid('cardiac_events'),
-        create: create_creator('cardiac_events'),
-        'delete': create_deletor('cardiac_events')
       },
       /** @class events.generic */
       generic: {
