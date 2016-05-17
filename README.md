@@ -274,4 +274,4 @@ npm test
 
 ## License
 
-[MIT](https://github.com/ryanseys/node-jawbone-up/blob/master/LICENSE.md) &copy; 2014 Ryan Seys
+[MIT](LICENSE) &copy; 2014 Ryan Seys
