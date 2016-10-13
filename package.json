@@ -2,7 +2,7 @@
   "name": "jawbone-up",
   "version": "0.1.2",
   "dependencies": {
-    "request": "2.27.0"
+    "request": "2.74.0"
   },
   "repository": {
     "url": "https://github.com/ryanseys/node-jawbone-up"
